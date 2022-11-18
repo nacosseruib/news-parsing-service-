@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <h1>Account Login</h1>
+    
+    <div align="center" class="row">
+        <div align="center" class="col-md-6">
+            <form action="{{ path('app_login') }}" method="post">
+                <label for="username">Email:</label>
+                <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}"/>
+
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="_password"/>
+
+                {# If you want to control the URL the user is redirected to on success
+                <input type="hidden" name="_target_path" value="/account"/> #}
+
+                <button type="submit">login</button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

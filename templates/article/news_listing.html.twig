@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Downloaded News{% endblock %}
+
+{% block body %}
+  
+<div align="center">
+<div class="p-2 m-3"><h2>Welcome To Our Downloaded News Article</h2></div>
+<div class="card px-3 pt-3" style="max-width: 100%">
+  <!-- News block -->
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">News Article</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/article">Home</a>
+            </li>
+        </ul>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search news article" aria-label="Search">
+            <button class="btn btn-outline-success" type="button">Search</button>
+        </form>
+        </div>
+    </div>
+    </nav>
+    <br/><br/>
+    <div class="container">
+    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+    <div class="row">
+        <div class="col-md-8">
+            {% if maxPages > 0 %}
+                {% for article in articles %}
+                    <div class="card mb-3">
+                        <img src="{{ article.picture }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title }}</h5>
+                            <p class="card-text">{{ article.description }}</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                {# article.getcreated_at | date('Y-m-d') }}, {{ article.getcreated_at | date('H:i:s') #}
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger">No news article available now !</h5>
+                        </div>
+                    </div>
+            {% endif %}
+            <hr />
+            
+            {% if maxPages > 0 %}
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="pagination">
+                        <li class="page-item">{{ knp_pagination_render(articles) }}</li>
+                    </ul>
+                </div>
+            </div>
+             {% endif %}
+
+        </div> 
+
+
+        <div class="col-12 col-md-4">
+        {% if maxPages > 0 %}
+            <div class="card">
+                <div class="card-body">
+                    <img src="{{ newsHighlihgt.picture }}" class="card-img-top" alt="..." style="height: 300px;">
+                    <h5>{{ newsHighlihgt.title}}</h5>
+                    <hr/>
+                    <p>{{newsHighlihgt.description}}</p>
+                </div>
+            </div>
+        {% endif %}
+        <br/>
+        
+
+        <br/>
+        {# <div class="card">
+            <div class="card-body">
+            <hr/>
+            <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/ZEyAs3NWH4A" title="YouTube video" allowfullscreen></iframe>
+            </div>
+        </div> #}
+      </div>
+    </div>
+  </div>
+
+  <!-- News block -->
+</div>
+</div>
+
+
+{% endblock %}
